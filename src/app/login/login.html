@@ -1,0 +1,101 @@
+<div class="container py-5 d-flex justify-content-center">
+
+  <div class="card shadow-lg border-0 rounded-4 p-4 w-100" style="max-width: 400px;">
+
+    <!-- Título -->
+    <div class="text-center mb-4">
+
+      <i class="bi bi-person-circle text-primary" style="font-size: 4rem;"></i>
+
+      <h2 class="fw-bold mt-3">
+        Iniciar Sesión
+      </h2>
+
+      <p class="text-muted">
+        Bienvenido de nuevo
+      </p>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="error" class="alert alert-danger text-center">
+      <i class="bi bi-exclamation-circle-fill me-2"></i>
+      {{ error }}
+    </div>
+
+    <!-- Usuario -->
+    <div class="mb-3">
+
+      <label class="form-label fw-semibold">
+        Usuario
+      </label>
+
+      <div class="input-group">
+
+        <span class="input-group-text">
+          <i class="bi bi-person-fill"></i>
+        </span>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="username"
+          placeholder="Ingresa tu usuario"
+        >
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="mb-4">
+
+      <label class="form-label fw-semibold">
+        Contraseña
+      </label>
+
+      <div class="input-group">
+
+        <span class="input-group-text">
+          <i class="bi bi-lock-fill"></i>
+        </span>
+
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="password"
+          placeholder="Ingresa tu contraseña"
+        >
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <div class="d-grid">
+
+      <button
+        class="btn btn-primary btn-lg rounded-3"
+        (click)="login()"
+        [disabled]="loading">
+
+        <span *ngIf="!loading">
+          <i class="bi bi-box-arrow-in-right me-2"></i>
+          Entrar
+        </span>
+
+        <span *ngIf="loading">
+          <span
+            class="spinner-border spinner-border-sm me-2"
+            role="status">
+          </span>
+          Entrando...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 text-center">
+    "username": "emilys",
+    "password": "emilyspass",
+    <br>
+
+    "username": "michaelw",
+    "password": "michaelwpass",
+</div>

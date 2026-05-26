@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/">
+      <i class="bi bi-egg-fried ms-2 me-1 text-primary"></i>
+      RecetApp</a>
+
+    <!-- Botón hamburguesa -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContenido"
+      aria-controls="navbarContenido"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido colapsable -->
+    <div class="collapse navbar-collapse" id="navbarContenido">
+
+      <!-- Links izquierda -->
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recipes">
+            Recetas
+          </a>
+        </li>
+
+        <!-- Solo visible si hay sesión -->
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/perfil">
+            Mi Perfil
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Links derecha -->
+      <ul class="navbar-nav">
+
+        <!-- Favoritos -->
+        <li class="nav-item me-2" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/favoritos">
+            <i class="bi bi-heart-fill text-danger"></i>
+            Favoritos ({{contadorFavoritos}})
+          </a>
+        </li>
+
+        <!-- Bienvenida -->
+
+        <li class="nav-item mt-2 me-2" *ngIf="authService.isLoggedIn()">
+          <span class="fw-bold" style="color:#5CFF8F;">
+            Hola, {{userActive()}}
+          </span>
+        </li>
+
+        <!-- Login -->
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/login">
+            Login
+          </a>
+        </li>
+
+        <!-- Logout -->
+        <li class="nav-item mt-1" *ngIf="authService.isLoggedIn()">
+          <a
+            class="btn btn-outline-danger btn-sm "
+            style="cursor:pointer"
+            (click)="logout()">
+
+            Logout
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

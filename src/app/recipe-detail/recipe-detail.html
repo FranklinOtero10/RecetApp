@@ -1,0 +1,151 @@
+
+<div *ngIf="cargando" class="text-center py-5 mt-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Cargando...</p>
+</div>
+
+<!-- <div *ngIf="error" class="alert alert-danger text-center mt-4">{{error}}</div> -->
+
+<section *ngIf="!cargando && !error" class="container py-4">
+
+    <!-- boton volver -->
+    <a routerLink="/recipes" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left me-1"></i> Volver
+    </a>
+
+    <div class="row g-5">
+
+        <!-- imagen + info -->
+        <div class="col-lg-4">
+
+            <img [src]="detalle?.image"  class="img-fluid rounded-4 shadow-sm mb-3"
+                alt="Pizza">
+
+            <!-- informacion -->
+            <div class="text-secondary">
+
+                <p class="mb-2">
+                    <i class="bi bi-clock"></i>
+                    Prep: {{detalle.prepTimeMinutes}} min · Cocción: {{detalle.cookTimeMinutes}} min
+                </p>
+
+                <p class="mb-2">
+                    <i class="bi bi-people"></i>
+                    {{detalle.servings}} porciones · {{detalle.difficulty}}
+                </p>
+
+                <p class="mb-2">
+                    <i class="bi bi-fire"></i>
+                    {{detalle.caloriesPerServing}} cal/porción
+                </p>
+
+                <p class="text-warning fw-semibold">
+                    ★ {{detalle.rating}}
+                    <span class="text-secondary">
+                        ({{detalle.reviewCount}} reseñas)
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- detalle -->
+        <div class="col-lg-8">
+
+            <!-- categoria -->
+            <p class="text-secondary mb-1">
+                {{detalle.cuisine}} · {{detalle.mealType.join(', ')}}
+            </p>
+
+            <!-- titulo -->
+            <h1 class="fw-bold mb-4">
+                {{detalle.name}}
+            </h1>
+
+            <!-- botones -->
+            <div class="d-flex gap-3 mb-4">
+
+                <!-- favoritos -->
+                 <!-- Solo visible si el usuario tiene sesion -->
+            <button *ngIf="authService.isLoggedIn()" class="btn"
+                [class.btn-danger]="favService.esFavorito(detalle?.id)"
+                [class.btn-outline-danger]="!favService.esFavorito(detalle?.id)" (click)="toggle()">
+                <i class="bi me-1" 
+                    [class.bi-heart]="!favService.esFavorito(detalle?.id)"
+                    [class.bi-heart-fill]="favService.esFavorito(detalle?.id)">
+                </i>
+                {{favService.esFavorito(detalle?.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'}}
+            </button>
+
+                <!-- volver -->
+                <a routerLink="/recipes" class="btn btn-outline-secondary">
+                     <i class="bi bi-arrow-left me-1"></i> Volver
+                </a>
+
+            </div>
+
+            <!-- contenido -->
+            <div class="row g-5">
+
+                <!-- ingredientes -->
+                <div class="col-md-5">
+
+                    <h4 class="fw-bold mb-3">
+                        Ingredientes
+                    </h4>
+
+                    <ul class="ps-3">
+
+                        <li class="mb-2" *ngFor=" let ingredient of detalle.ingredients">
+                            {{ingredient}}
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- instrucciones -->
+                <div class="col-md-7">
+
+                    <h4 class="fw-bold mb-3">
+                        Instrucciones
+                    </h4>
+
+                    <ol class="ps-3">
+
+                        <li class="mb-3" *ngFor=" let instruction of detalle.instructions">
+                            {{instruction}}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div *ngIf="error" class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg rounded-4 text-center p-5">
+
+                <!-- icono -->
+                <div class="text-danger fs-1">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
+
+                 <!-- titulo -->
+                <h2 class="fw-bold mb-3">
+                    Receta no encontrada
+                </h2>
+
+                <!-- descripcion -->
+                <p class="text-secondary mb-4">
+                    {{error}}
+                </p>
+                <!-- boton -->
+                <a routerLink="/recipes" class="btn btn-outline-secondary gap-3">
+                    <i class="bi bi-arrow-left me-1"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

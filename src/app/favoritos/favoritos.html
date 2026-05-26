@@ -1,0 +1,51 @@
+<section class="container mt-4">
+
+    <!-- boton volver -->
+    <a routerLink="/recipes" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left me-1"></i> Volver al cátalogo
+    </a>
+
+    <!-- titulo -->
+    <h2 class="fw-bold mb-4">
+        Mis favoritos
+    </h2>
+
+    <div *ngIf="items.length === 0" class="alert alert-info  fw-bold mt-4 col-4">
+        Aun no tienes recetas favoritas. <a routerLink="/recipes">Ver catálogo</a>
+    </div>
+
+    <!-- card -->
+    <div class="row g-4">
+
+        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of items">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+
+                <!-- imagen -->
+                <img [src]="item?.image" class="card-img-top" style="height:180px; object-fit:cover;"
+                    [alt]="item?.title">
+
+                <!-- body -->
+                <div class="card-body d-flex flex-column">
+
+                    <!-- titulo -->
+                    <h5 class="fw-bold mb-2 text-truncate">
+                        {{item.name}}
+                    </h5>
+
+                    <!-- categoria -->
+                    <p class="text-secondary mb-4">
+                        <!-- {{item.mealType.join(', ')}} -->
+                        {{item.cuisine}}
+                    </p>
+
+                    <!-- boton -->
+                    <button class="btn btn-danger mt-auto" (click)="quitarFav(item)" title="Quitar de favoritos">
+                        <i class="bi bi-heart-fill"></i>
+                        Quitar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

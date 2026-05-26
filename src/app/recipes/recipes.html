@@ -1,0 +1,62 @@
+<section class="container mt-4">
+
+    <!-- filtros -->
+    <div class="row g-3 align-items-center mb-4">
+
+        <!-- select -->
+        <div class="col-md-5">
+            <select class="form-select" (change)="filtrarMealType($event)">
+                <option value="all">Todos los tipos</option>
+
+                <option
+                    *ngFor="let type of mealTypes"
+                    [value]="type.toLowerCase()">
+                    {{ type }}
+                </option>
+            </select>
+        </div>
+
+        <!-- buscador -->
+        <div class="col-md-5">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar receta..."
+                [(ngModel)]="busqueda" 
+                (ngModelChange)="searchRecipe()">
+        </div>
+
+        <!-- contador y cargando -->
+        <div class="col-md-2">
+            <span class="fw-bold">
+                {{ cargandoT ? 'Cargando...' : data.length + ' Recetas' }}
+            </span>
+        </div>
+    </div>
+
+    <!-- spinner -->
+    <div *ngIf="cargando" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Cargando recetas...</p>
+    </div>
+
+    <!-- cards recipes -->
+    <div *ngIf="data.length > 0; else sinResultados" class="row g-4">
+        <div
+            class="col-sm-6 col-md-4 col-lg-3 d-flex mb-4"
+            *ngFor="let recipe of data">
+
+            <div
+                app-recipe-card
+                class="w-100"
+                [recipe]="recipe"
+                (detalle)="detalleRecipe($event)">
+            </div>
+        </div>
+    </div>
+
+    <ng-template #sinResultados>
+        <p *ngIf="!cargando">Sin resultados.</p>
+    </ng-template>
+
+</section>
