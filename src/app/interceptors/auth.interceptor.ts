@@ -5,6 +5,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http'
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
+  //? "HttpRequest<any>" se usa con el tipo :any" porque el interceptor maneja todas las peticiones de la app
+  //? representa cualquier petición HTTP que pase por el interceptor
+
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = localStorage.getItem('token');
 

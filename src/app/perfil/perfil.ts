@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService, ProfileUser } from '../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -9,7 +9,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class Perfil implements OnInit {
 
-  data: any = {};
+  /* data: ProfileUser = {
+    id: 0,
+    age: 0,
+    birthDate: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    image: '',
+    phone: '',
+  } */
+
+  data: ProfileUser | null = null
+
   cargando: boolean = false;
 
   constructor(

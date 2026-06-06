@@ -17,7 +17,7 @@
           <div class="text-center mb-4">
             <img
               
-              [src]="data.image" 
+              [src]="data?.image" 
               alt="Perfil"
               class="rounded-circle border border-3"
               width="150"
@@ -35,7 +35,7 @@
               <input 
                 type="text" 
                 class="form-control" 
-                [value] = "data.firstName + ' ' + data.lastName"
+                [value] = "data?.firstName + ' ' + data?.lastName"
                 readonly
                 >
             </div>
@@ -46,7 +46,7 @@
               <input 
                 type="text" 
                 class="form-control" 
-                [value]= "data.username"
+                [value]= "data?.username"
                 readonly
               >
             </div>
@@ -57,7 +57,7 @@
               <input 
                 type="email" 
                 class="form-control" 
-                [value]= "data.email"
+                [value]= "data?.email"
                 readonly
               >
             </div>
@@ -68,7 +68,7 @@
               <input 
                 type="number" 
                 class="form-control" 
-                [value]= "data.age"
+                [value]= "data?.age"
                 readonly
               >
             </div>
@@ -79,7 +79,7 @@
               <input 
                 type="text" 
                 class="form-control" 
-                [value]= "data.phone"
+                [value]= "data?.phone"
                 readonly
               >
             </div>
@@ -90,7 +90,7 @@
               <input 
                 type="text" 
                 class="form-control" 
-                [value]= "data.birthDate"
+                [value]= "data?.birthDate"
                 readonly
               >
             </div>

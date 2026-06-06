@@ -2,24 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+interface LoginResponse {
+  id: number,
+  username: string,
+  firstName: string,
+  accessToken: string,
+  expiresInMins?: number,
+}
+
+export interface ProfileUser {
+  id: number,
+  username: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  age: number,
+  phone: string,
+  birthDate: string,
+  image: string,
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  private api: String = 'https://dummyjson.com';
+  private readonly api: string = 'https://dummyjson.com';
 
-  private loginUrl = `${this.api}/auth/login`;
+  private readonly loginUrl: string = `${this.api}/auth/login`;
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.loginUrl, {
+  login(username: string, password: string, expiresInMins?: number): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.loginUrl, {
       username,
       password,
-      //expiresInMins: 60   // DummyJSON acepta este parametro opcional
+      expiresInMins: expiresInMins   // DummyJSON acepta este parametro opcional
     });
   }
 
@@ -40,10 +60,10 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 
-  getProfileUser(): Observable<any> {
+  getProfileUser(): Observable<ProfileUser> {
 
     const userAuth: string = `${this.api}/auth/me`;
-    return this.http.get<any>(userAuth);
+    return this.http.get<ProfileUser>(userAuth);
 
   }
 

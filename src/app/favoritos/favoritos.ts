@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FavoritosService } from '../services/favoritos.service';
+import { favItem, FavoritosService } from '../services/favoritos.service';
 import Swal from 'sweetalert2';
+import { RecipesR } from '../services/recipe.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class Favoritos implements OnInit {
 
-  items: any[] = [];
+  items: favItem[] = [];
 
   constructor( private favService: FavoritosService ) { }
 

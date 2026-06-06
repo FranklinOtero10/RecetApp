@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeService } from '../services/recipe.service';
+import { RecipeService, RecipesR } from '../services/recipe.service';
 import { AuthService } from '../services/auth.service';
 import { FavoritosService } from '../services/favoritos.service';
 
@@ -12,7 +12,7 @@ import { FavoritosService } from '../services/favoritos.service';
 })
 export class RecipeDetail implements OnInit {
 
-  detalle: any = null;
+  detalle: RecipesR | null = null;
   cargando: boolean = false;
   error: string = '';
 

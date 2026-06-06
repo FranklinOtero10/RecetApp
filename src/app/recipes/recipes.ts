@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService } from '../services/recipe.service';
+import { RecipeService, RecipesR } from '../services/recipe.service';
 import { FavoritosService } from '../services/favoritos.service';
 
 @Component({
@@ -10,12 +10,12 @@ import { FavoritosService } from '../services/favoritos.service';
 })
 export class Recipes implements OnInit {
 
-  data: any = [];
+  data: RecipesR[] = [];
   cargando: boolean = false;
   cargandoT: boolean = false;
-  detalle: any = null;
-  valor = '';
-  busqueda = '';
+  detalle: RecipesR | null = null;
+  valor: string = '';
+  busqueda: string = '';
   mealTypes: string[] = [
     'Breakfast',
     'Lunch',

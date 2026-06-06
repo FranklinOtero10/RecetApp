@@ -6,7 +6,9 @@
 
 <!-- <div *ngIf="error" class="alert alert-danger text-center mt-4">{{error}}</div> -->
 
-<section *ngIf="!cargando && !error" class="container py-4">
+<div *ngIf="detalle">
+
+    <section *ngIf="!cargando && !error" class="container py-4">
 
     <!-- boton volver -->
     <a routerLink="/recipes" class="btn btn-outline-secondary mb-4">
@@ -18,7 +20,7 @@
         <!-- imagen + info -->
         <div class="col-lg-4">
 
-            <img [src]="detalle?.image"  class="img-fluid rounded-4 shadow-sm mb-3"
+            <img [src]="detalle.image"  class="img-fluid rounded-4 shadow-sm mb-3"
                 alt="Pizza">
 
             <!-- informacion -->
@@ -67,13 +69,13 @@
                 <!-- favoritos -->
                  <!-- Solo visible si el usuario tiene sesion -->
             <button *ngIf="authService.isLoggedIn()" class="btn"
-                [class.btn-danger]="favService.esFavorito(detalle?.id)"
-                [class.btn-outline-danger]="!favService.esFavorito(detalle?.id)" (click)="toggle()">
+                [class.btn-danger]="favService.esFavorito(detalle.id)"
+                [class.btn-outline-danger]="!favService.esFavorito(detalle.id)" (click)="toggle()">
                 <i class="bi me-1" 
-                    [class.bi-heart]="!favService.esFavorito(detalle?.id)"
-                    [class.bi-heart-fill]="favService.esFavorito(detalle?.id)">
+                    [class.bi-heart]="!favService.esFavorito(detalle.id)"
+                    [class.bi-heart-fill]="favService.esFavorito(detalle.id)">
                 </i>
-                {{favService.esFavorito(detalle?.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'}}
+                {{favService.esFavorito(detalle.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'}}
             </button>
 
                 <!-- volver -->
@@ -120,6 +122,10 @@
         </div>
     </div>
 </section>
+
+</div>
+
+
 
 
 <div *ngIf="error" class="container py-5 mt-5">

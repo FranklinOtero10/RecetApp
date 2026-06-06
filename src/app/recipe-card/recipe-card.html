@@ -1,7 +1,8 @@
-<div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden mb-3">
+<div *ngIf="recipe">
+    <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden mb-3">
 
     <!-- imagen -->
-    <img [src]="recipe?.image" class="card-img-top" style="height:220px; object-fit:cover;" [alt]="recipe?.title">
+    <img [src]="recipe.image" class="card-img-top" style="height:220px; object-fit:cover;" [alt]="recipe.name">
 
     <div class="card-body d-flex flex-column">
 
@@ -24,22 +25,23 @@
         <!-- botones -->
         <div class="mt-auto d-flex gap-2">
 
-            <a class="btn btn-success flex-fill" [routerLink]="['/recipe', recipe?.id]">
+            <a class="btn btn-success flex-fill" [routerLink]="['/recipe', recipe.id]">
                 <i class="bi bi-eye"></i>
                 Ver detalle
             </a>
 
             <!-- Solo visible si el usuario tiene sesion -->
             <button *ngIf="authService.isLoggedIn()" class="btn btn-sm flex-fill"
-                [class.btn-danger]="favoritosService.esFavorito(recipe?.id)"
-                [class.btn-outline-danger]="!favoritosService.esFavorito(recipe?.id)" (click)="toggle()">
+                [class.btn-danger]="favoritosService.esFavorito(recipe.id)"
+                [class.btn-outline-danger]="!favoritosService.esFavorito(recipe.id)" (click)="toggle()">
                 <i class="bi me-1" 
-                    [class.bi-heart]="!favoritosService.esFavorito(recipe?.id)"
-                    [class.bi-heart-fill]="favoritosService.esFavorito(recipe?.id)">
+                    [class.bi-heart]="!favoritosService.esFavorito(recipe.id)"
+                    [class.bi-heart-fill]="favoritosService.esFavorito(recipe.id)">
                 </i>
-                {{favoritosService.esFavorito(recipe?.id) ? 'Quitar' : 'Favorito'}}
+                {{favoritosService.esFavorito(recipe.id) ? 'Quitar' : 'Favorito'}}
 
             </button>
         </div>
     </div>
+</div>
 </div>

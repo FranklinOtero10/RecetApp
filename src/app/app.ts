@@ -40,7 +40,7 @@ export class App implements OnInit {
     //const user = JSON.parse(localStorage.getItem('currentUser')!);
     //this.currentUser = user.firstName;
 
-    const user = localStorage.getItem('currentUser');
+    const user: string | null  = localStorage.getItem('currentUser');
 
     return user
       ? JSON.parse(user).firstName

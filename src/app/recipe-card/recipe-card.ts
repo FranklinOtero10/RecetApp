@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FavoritosService } from '../services/favoritos.service';
+import { RecipesR } from '../services/recipe.service';
 
 @Component({
   selector: '[app-recipe-card]',
@@ -10,7 +11,7 @@ import { FavoritosService } from '../services/favoritos.service';
 })
 export class RecipeCard {
 
-  @Input() recipe: any = null;
+  @Input() recipe: RecipesR | null = null;
   @Output() detalle = new EventEmitter<number>();
 
 
@@ -32,7 +33,7 @@ export class RecipeCard {
     }
   }
 
-  getStars(rating: number): string {
+  getStars(rating: number = 0): string {
     return '★'.repeat(Math.round(rating)) +
       '☆'.repeat(5 - Math.round(rating));
   }

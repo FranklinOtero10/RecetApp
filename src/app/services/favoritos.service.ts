@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { RecipesR } from './recipe.service';
 
-interface favItem {
+export interface favItem {
   userId: number,
   id: number,
   name: string,
@@ -33,7 +34,7 @@ export class FavoritosService {
     return raw ? JSON.parse(raw) : {};
   }
 
-  private saveFavMap(map: Record<string, any[]>): void {
+  private saveFavMap(map: Record<string, favItem[]>): void {
     //localStorage.setItem('fav', JSON.stringify(map));
     const userId = this.getUserId();
     localStorage.setItem(`favoritos_${userId}`, JSON.stringify(map));
@@ -53,7 +54,7 @@ export class FavoritosService {
     return this.favSubject.getValue().some(r => r.id === recipeId);
   }
 
-  toggleFavorito(recipe: any): void {
+  toggleFavorito(recipe: RecipesR): void {
 
     // Si ya esta, lo quita. Si no, lo agrega.
     // Completa esta logica: usa esFavorito(), filter() o push()
